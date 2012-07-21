@@ -2,5 +2,9 @@
 layout: default
 ---
 <section class="content">
-  <p>Welcome to Joe Wheaton's Site! Definitely Under Construction.</p>
+  <ul>
+  {% for post in site.posts %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+  {% endfor %}
+  </ul>
 </section>
