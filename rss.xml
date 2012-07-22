@@ -1,0 +1,26 @@
+---
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Joe Wheaton</title>
+ <link href="http://josephwheaton.com/rss.xml" rel="self"/>
+ <link href="http://josephwheaton.com/"/>
+ <updated>{{ site.time | date_to_xmlschema }}</updated>
+ <id>http://josephwheaton.com/</id>
+ <author>
+   <name>Joe Wheaton</name>
+   <email>me@josephwheaton.com</email>
+ </author>
+
+ {% for post in site.posts %}
+ <entry>
+   <title>{{ post.title }}</title>
+   <link href="http://josephwheaton.com{{ post.url }}"/>
+   <updated>{{ post.date | date_to_xmlschema }}</updated>
+   <id>http://josephwheaton.com{{ post.id }}</id>
+   <content type="html">{{ post.content | xml_escape }}</content>
+ </entry>
+ {% endfor %}
+ 
+</feed>
