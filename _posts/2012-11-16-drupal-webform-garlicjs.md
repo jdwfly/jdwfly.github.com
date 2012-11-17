@@ -12,16 +12,16 @@ So I ended finding [Garlic.js](http://garlicjs.org). Now I will mention this isn
 Should be pretty straight forward add the javascript file and proper attributes and you are done right? Nope, this is where it got tricky and the main reason I wrote this article. To help those poor souls who just want it work.
 
 ## Adding the Javascript
-This part was pretty simple. I downloaded Garlic.js from their site and threw the garlic.js file into the same folder as my custom module. Since I already had a custom module for this site I just had to add this code.
+This part was pretty simple. I downloaded Garlic.js from their site and threw the garlic.js file into the same folder as my custom module. Since I already had a custom module for this site I just had to add this code.  
     function custommodulename_node_view($node, $view_node, $langcode) {  
 	    if ($node->type == 'webform') {  
 		  	drupal_add_js(drupal_get_path('module', 'jwj'). '/garlic.js');  
 			}  
 		}  
-This will quite simply load the garlic.js file only on the pages that are nodes of type webform. It is a pretty small file so if you just wanted to always include it through [hook_init](http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_init/7) as well.
+This will quite simply load the garlic.js file only on the pages that are nodes of type webform. It is a pretty small file so if you just wanted to always include it through [hook_init](http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_init/7) as well.  
 
 ## Adding the Attribute to Webforms
-This is where things got sticky. Partly because I can be a moron sometimes and read documentation and not comprehend what it is saying and partly because webform (or some other module) was clobbering the attributes on the form. I blame webform because I needed something to blame. I went the [hook_form_alter](http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_form_alter/7) route with no luck because of the clobbering issue. Next I tried doing it from the theme layer with the webform-form.tpl.php and that also turned up dry. Finally I figured the only way I could do it was to override the theme_form in my template.php file. Yay it worked!!! Code below.
+This is where things got sticky. Partly because I can be a moron sometimes and read documentation and not comprehend what it is saying and partly because webform (or some other module) was clobbering the attributes on the form. I blame webform because I needed something to blame. I went the [hook_form_alter](http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_form_alter/7) route with no luck because of the clobbering issue. Next I tried doing it from the theme layer with the webform-form.tpl.php and that also turned up dry. Finally I figured the only way I could do it was to override the theme_form in my template.php file. Yay it worked!!! Code below.  
     function jwj_form($variables) {  
 			$element = $variables['element'];  
 			if (strpos($element['#id'], 'webform') == FALSE) {  
