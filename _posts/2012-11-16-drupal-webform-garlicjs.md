@@ -18,14 +18,14 @@ Should be pretty straight forward add the javascript file and proper attributes 
 ## Adding the Javascript
 This part was pretty simple. I downloaded Garlic.js from their site and threw the garlic.js file into the same folder as my custom module. Since I already had a custom module for this site I just had to add this code.  
 
-<script src="https://gist.github.com/4096800.js?file=module.php"></script>
+<script src="https://gist.github.com/4096800.js?file=module.php"> </script>
 
 This will quite simply load the garlic.js file only on the pages that are nodes of type webform. It is a pretty small file so if you just wanted to always include it through [hook_init](http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_init/7) as well.  
 
 ## Adding the Attribute to Webforms
 This is where things got sticky. Partly because I can be a moron sometimes and read documentation and not comprehend what it is saying and partly because webform (or some other module) was clobbering the attributes on the form. I blame webform because I needed something to blame. I went the [hook_form_alter](http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_form_alter/7) route with no luck because of the clobbering issue. Next I tried doing it from the theme layer with the webform-form.tpl.php and that also turned up dry. Finally I figured the only way I could do it was to override the theme_form in my template.php file. Yay it worked!!! Code below.  
 
-<script src="https://gist.github.com/4096831.js?file=template.php"></script>
+<script src="https://gist.github.com/4096831.js?file=template.php"> </script>
 
 ## Updating JQuery
 But alas, there was a javascript error on the page now. Pesky javascript errors! Of course this was to do with the fact that JQuery version in Drupal is archaic. Also it was not actually mentioned which version of JQuery is needed on the Garlic.js site, but you are going to need at least 1.7 due to the .on function they are using. Thanks to this question on [Drupal Answers](http://drupal.stackexchange.com/questions/28820/how-do-i-update-jquery-to-the-latest-version-i-can-download/) it was easy enough to get JQuery 1.7 installed. Simply download and install the latest dev release of [Jquery Update](http://drupal.org/project/jquery_update) for 7.x of course. Download, install, and configure it to use 1.7 through it's admin page. 
