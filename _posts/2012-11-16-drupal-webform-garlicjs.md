@@ -22,12 +22,11 @@ This will quite simply load the garlic.js file only on the pages that are nodes 
 
 ## Adding the Attribute to Webforms
 This is where things got sticky. Partly because I can be a moron sometimes and read documentation and not comprehend what it is saying and partly because webform (or some other module) was clobbering the attributes on the form. I blame webform because I needed something to blame. I went the [hook_form_alter](http://api.drupal.org/api/drupal/modules!system!system.api.php/function/hook_form_alter/7) route with no luck because of the clobbering issue. Next I tried doing it from the theme layer with the webform-form.tpl.php and that also turned up dry. Finally I figured the only way I could do it was to override the theme_form in my template.php file. Yay it worked!!! Code below.  
-    function jwj_form($variables) {  
-			$element = $variables['element'];  
-			if (strpos($element['#id'], 'webform') == FALSE) {  
-				$element['#attributes'] = array('data-persist' => 'garlic');  
-			}  
-			  
+    function customtheme_form($variables) {  
+      $element = $variables['element'];  
+      if (strpos($element['#id'], 'webform') == FALSE) {  
+        $element['#attributes'] = array('data-persist' => 'garlic');  
+      }  
 			if (isset($element['#action'])) {
 				$element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);  
 			}  
