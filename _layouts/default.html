@@ -8,26 +8,35 @@
   
   <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" />
   <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 
   <script src="/js/modernizr.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+    });
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-inverse navbar-static-top">
     <div class="navbar-inner">
       <div class="container">
-        <a class="brand" href="#">Joe Wheaton</a>
         <ul class="nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li id="home"><a href="/">Home</a></li>
+          <li class="divider-vertical"></li>
+          <li id="about"><a href="/about">About</a></li>
+          <li class="divider-vertical"></li>
+          <li id="contact"><a href="/contact">Contact</a></li>
         </ul>
       </div>
     </div>
   </nav>
-  <div id="main" class="container">
-    <header>
+  <header>
+    <div class="container">
       <h1>Joe Wheaton</h1>
-    </header>
+    </div>
+  </header>
+  <div id="main" class="container">
     
     {{ content }}
     
